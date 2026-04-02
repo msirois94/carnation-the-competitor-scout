@@ -3,10 +3,7 @@ name: Carnation Weekly Report
 on:
   schedule:
     # Monday 9 AM AEST = Sunday 10 PM UTC
-    # Cron format: minute hour day month weekday
-    - cron: '0 22 * * 0'  # Sunday 10 PM UTC = Monday 9 AM AEST
-  
-  # Also allow manual trigger if needed
+    - cron: '0 22 * * 0'
   workflow_dispatch:
 
 jobs:
@@ -26,9 +23,8 @@ jobs:
         run: pip install anthropic requests
       
       - name: Run Carnation
-          run: |
-            cd ${{ github.workspace }}
-            python3 carnation.py
+        run: python3 carnation.py
+        env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       
