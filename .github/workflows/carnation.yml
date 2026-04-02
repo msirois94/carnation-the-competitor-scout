@@ -26,8 +26,9 @@ jobs:
         run: pip install anthropic requests
       
       - name: Run Carnation
-        run: python3 carnation.py
-        env:
+          run: |
+            cd ${{ github.workspace }}
+            python3 carnation.py
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       
